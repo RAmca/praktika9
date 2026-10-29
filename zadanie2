@@ -1,0 +1,50 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <locale.h>
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    long long number;
+    char answer;
+
+    do {
+        printf("\nВведите целое число: ");
+        scanf("%lld", &number);
+
+        long long temp = number; 
+        int pos = 1;
+        int sum_even = 0;
+        int sum_odd = 0;
+
+        if (temp < 0) temp = -temp;
+
+        if (temp == 0) {
+            sum_odd = 0;
+        } else {
+            while (temp > 0) {
+                int digit = temp % 10;
+                if (pos % 2 != 0) {
+                    sum_odd += digit;
+                } else {
+                    sum_even += digit;
+                }
+                temp /= 10;
+                pos++;
+            }
+        }
+
+        int result = sum_even * sum_odd;
+        printf("Сумма четных разрядов: %d\n", sum_even);
+        printf("Сумма нечетных разрядов: %d\n", sum_odd);
+        printf("Произведение сумм: %d\n", result);
+
+        while (getchar() != '\n'); 
+
+        printf("\nПродолжить? (Да - y, Нет - n): ");
+        answer = getchar();
+
+    } while (answer != 'n' && answer != 'N');
+
+    printf("Программа завершена.\n");
+    return 0;
+}
